@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { CliApplication, ImportCommand, HelpCommand, VersionCommand } from './cli/index.js';
 
 const cliApplication = new CliApplication();
