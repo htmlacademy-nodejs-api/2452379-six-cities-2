@@ -5,7 +5,7 @@ import { Good } from './good.type.js';
 import { User } from './user.type.js';
 
 type OfferFlags = 'isPremium' | 'isFavorite';
-type OfferType = typeof OFFER_TYPES[number];
+export type OfferType = typeof OFFER_TYPES[number];
 
 export type Offer = {
   title: string;
