@@ -1,82 +1,42 @@
 import path from 'node:path';
-import { FileReader } from './file-reader.interface.js';
-import fs from 'node:fs/promises';
-import { Offer } from '../../types/offer.type.js';
+import { IFileReader } from './file-reader.interface.js';
+import EventEmitter from 'node:events';
+import { createReadStream } from 'node:fs';
 
-export class TsvFileReader implements FileReader {
+const CHUNK_SIZE = 100;
+
+export class TsvFileReader extends EventEmitter implements IFileReader {
   public rawData: string = '';
 
   constructor(
     private readonly fileName: string
-  ) { }
-
-  public async read(): Promise<void> {
-    this.rawData = await fs.readFile(path.resolve(this.fileName), { encoding: 'utf-8' });
+  ) {
+    super();
   }
 
-  public toArray(): Offer[] {
-    if (!this.rawData) {
-      throw new Error('The file wasn\'t read');
-    }
+  public async read(): Promise<void> {
+    let chunk;
+    let remainingData = '';
+    let importedRowsCount = 0;
+    let nextLineIndex: number;
 
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((row) => row.split('\t'))
-      .map(([
-        title,
-        description,
-        city,
-        location,
-        previewUrl,
-        images,
-        rating,
-        offerType,
-        roomsCount,
-        questsCount,
-        price,
-        goods,
-        hostName,
-        hostEmail,
-        hostAvatarUrl,
-        hostPassword,
-        hostType,
-        reviewsCount,
-        datetime,
-        isPremium,
-        isFavorite
-      ]) => {
-        const [latitude, longitude] = location.split(' ').map((value) => parseFloat(value));
+    const readStream = createReadStream(path.resolve(this.fileName), { highWaterMark: CHUNK_SIZE, encoding: 'utf-8' });
 
-        return ({
-          title,
-          description,
-          city: city,
-          location: {
-            latitude,
-            longitude
-          },
-          previewUrl,
-          images: images.split(' '),
-          rating: parseFloat(rating),
-          type: offerType,
-          roomsCount: parseInt(roomsCount, 10),
-          questsCount: parseInt(questsCount, 10),
-          price: parseFloat(price),
-          goods: goods.split(','),
-          host: {
-            name: hostName,
-            email: hostEmail,
-            avatarUrl: hostAvatarUrl,
-            password: hostPassword,
-            type: hostType,
-          },
-          reviewsCount: parseInt(reviewsCount, 10),
-          datetime,
-          isPremium: isPremium === 'true',
-          isFavorite: isFavorite === 'true'
-        }) as Offer;
+    readStream.on('readable', () => {
+      while (null !== (chunk = readStream.read(CHUNK_SIZE))) {
+        remainingData += chunk.toString();
+        while ((nextLineIndex = remainingData.indexOf('\n')) >= 0) {
+          const row = remainingData.slice(0, nextLineIndex + 1);
+          remainingData = remainingData.slice(nextLineIndex + 1);
+          importedRowsCount++;
+
+          this.emit('row', row);
+        }
       }
-      );
+    });
+
+    readStream.on('end', () => {
+      this.emit('end', importedRowsCount);
+    });
   }
 }
