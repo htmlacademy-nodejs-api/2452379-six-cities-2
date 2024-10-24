@@ -1,0 +1,82 @@
+{
+  "api": {
+    "titles": [
+      "SOOOOO BIGGG",
+      "no, i don't like vinegar",
+      "close, enough",
+      "flatbuck"
+    ],
+    "descriptions": [
+      "na sever privezli bananas!!!!!!!!!!!!!",
+      "sorok let i was coocking omplet, prekrashay truditsa -- nado ploditsya",
+      "ne fuck up'sya eto the best otdih"
+    ],
+    "locations": [
+      {
+        "latitude": 48.85661,
+        "longitude": 2.351499
+      },
+      {
+        "latitude": 50.938361,
+        "longitude": 6.959974
+      },
+      {
+        "latitude": 50.846557,
+        "longitude": 4.351697
+      },
+      {
+        "latitude": 52.370216,
+        "longitude": 4.895168
+      },
+      {
+        "latitude": 53.550341,
+        "longitude": 10.000654
+      },
+      {
+        "latitude": 51.225402,
+        "longitude": 6.776314
+      }
+    ],
+    "previewUrls": [
+      "https://jooinn.com/images1280_/silhouette-of-man-standing-near-body-of-water.jpg",
+      "https://jooinn.com/images1280_/person-holding-cup-of-coffee-3.jpg",
+      "https://jooinn.com/images1280_/man-having-a-phone-call-in-front-of-a-laptop-5.jpg"
+    ],
+    "images": [
+      [
+        "https://jooinn.com/images1280_/white-ceramic-mug-beside-bread-on-white-ceramic-saucer-2.jpg",
+        "https://jooinn.com/images1280_/scenic-view-of-mountains-against-sky-at-sunset-2.jpg"
+      ],
+      [
+        "https://jooinn.com/images1280_/in-girl39s-handbag-5.jpg"
+      ],
+      [
+        "https://jooinn.com/images1280_/purple-flower-wallpaper-3.jpg",
+        "https://jooinn.com/images1280_/in-girl39s-handbag-5.jpg"
+      ]
+    ],
+    "hosts": [
+      {
+        "name": "Alex",
+        "email": "sfff@mm.ru",
+        "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Chicken_Nuggets.jpg/330px-Chicken_Nuggets.jpg",
+        "password": "Hihihi",
+        "type": "regular"
+      },
+      {
+        "name": "Firuza",
+        "email": "fafring@html.css",
+        "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Vegan_%22chicken%22_nugget.jpg/255px-Vegan_%22chicken%22_nugget.jpg",
+        "password": "notbad",
+        "type": "pro"
+      },
+      {
+        "name": "Prohor",
+        "email": "pohor@nat.eba",
+        "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/McDonalds-Chicken-McNuggets.jpg/345px-McDonalds-Chicken-McNuggets.jpg",
+        "password": "notgood",
+        "type": "pro"
+      }
+    ]
+  }
+}
